@@ -10,6 +10,7 @@ int main() {
     int* randomNumbers = generateRandomNumbers(n);
     int* randomNumbersClone = cloneVector(randomNumbers, n);
 
+    // check if the clone vector was successfully created
     if (randomNumbersClone == NULL) {
         printf("Memory allocation failed! Clone vector returned NULL. \n");
         printf("Exiting the program.\n");
