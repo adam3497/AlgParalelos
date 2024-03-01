@@ -5,11 +5,12 @@
 #include "merge_sort.h"
 #include "generate_random_numbers.h"
 #include "clone.h"
+#include "parallel_merge_sort.h"
 
 int main() {
     // variables to calculate the time
-    clock_t start, end;
-    double cpu_time_used;
+    clock_t start, end, start2, end2;
+    double cpu_time_used, cpu_time_used2;
 
     // Variables for the generation of the vector and its cone
     int n = 500000;
@@ -33,19 +34,25 @@ int main() {
     end = clock();
 
     // Calculate the CPU time used
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // convert to nanoseconds
-
-    /* printf("Given array is \n");
-    for (int i = 0; i < n; i++)
-        printf("%d ", randomNumbers[i]);
-    printf("\n");
-
-    printf("Sorted array is \n");
-    for (int i = 0; i < n; i++)
-        printf("%d ", randomNumbersClone[i]);
-    printf("\n"); */
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; // convert to seconds
 
     printf("Execution time for the recursive merge sort: %f seconds\n", cpu_time_used);
+
+    // Execution of the parallel merge sort
+    int* randomNumbersClone2 = cloneVector(randomNumbers, n);
+
+    // Record the start time for the recursive merge sort
+    start2 = clock();
+
+    startParallelSorting(randomNumbersClone2, n);
+
+    // Record the end time for the recursive merge sort
+    end2 = clock();
+
+    // Calculate the CPU time used
+    cpu_time_used2 = ((double) (end2 - start2)) / CLOCKS_PER_SEC; // convert to seconds
+
+    printf("Execution time for the parallel merge sort: %f seconds\n", cpu_time_used2);
 
     return 0;
 }   

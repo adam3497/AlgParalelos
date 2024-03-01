@@ -1,8 +1,11 @@
 #include "merge_sort.h"
 
-// Function to merge 2 sub-arrays
-// First: arr[1..m]
-// Second: arr[m+1..r]
+// Merge function to merge two sorted sub-arrays
+// It receives 3 arguments
+// int arr[] is the original array
+// int l is the position of the start of the first sub-array
+// int m is the middle point or the end of the first sub-array (m + 1 is the beginning of the second)
+// int r is the end of the second sub-array
 void merge(int arr[], int l, int m, int r) {
     int i, j, k;
     // Calculate the length of both sub-arrays
@@ -49,12 +52,14 @@ void merge(int arr[], int l, int m, int r) {
 }
 
 // Recursive merge sort function
-void mergeSort(int arr[], int l, int r) {
-    int m; 
-    
+// It receives 3 arguments
+// int arr[] is the original array of size n
+// int l is the beginning of the first sub-array
+// int r is the end of the second sub-array
+void mergeSort(int arr[], int l, int r) { 
     if (l < r) {
         // find the middle point
-        m = l + (r - l) / 2; 
+        int m = l + (r - l) / 2; 
 
         // sort first and second halves
         mergeSort(arr, l, m);
