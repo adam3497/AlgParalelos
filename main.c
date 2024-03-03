@@ -6,6 +6,7 @@
 #include "generate_random_numbers.h"
 #include "clone.h"
 #include "parallel_merge_sort.h"
+#include "vector_mode.h"
 
 int main() {
     // variables to calculate the time
@@ -13,7 +14,7 @@ int main() {
     double cpu_time_used, cpu_time_used2;
 
     // Variables for the generation of the vector and its cone
-    int n = 500000;
+    int n = 100000;
     int* randomNumbers = generateRandomNumbers(n);
     int* randomNumbersClone = cloneVector(randomNumbers, n);
 
@@ -53,6 +54,12 @@ int main() {
     cpu_time_used2 = ((double) (end2 - start2)) / CLOCKS_PER_SEC; // convert to seconds
 
     printf("Execution time for the parallel merge sort: %f seconds\n", cpu_time_used2);
+
+    // Calculate the mode of the sorted vector
+
+    int mode = parallel_mode(randomNumbersClone, n, 4);
+
+    printf("The mode for the sorted vector is %d\n", mode);
 
     return 0;
 }   

@@ -5,7 +5,7 @@ rem Set compiler
 set CC=gcc
 
 rem Set source files and object files
-set SRCS=merge_sort.c generate_random_numbers.c clone.c parallel_merge_sort.c main.c
+set SRCS=merge_sort.c generate_random_numbers.c clone.c parallel_merge_sort.c vector_mode.c main.c
 set OBJS=
 
 rem Set target executable name
