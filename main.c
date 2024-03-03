@@ -13,7 +13,7 @@ int main() {
     clock_t start, end, start2, end2;
     double cpu_time_used, cpu_time_used2;
 
-    // Variables for the generation of the vector and its cone
+    // Variables for the generation of the vector and its clone
     int n = 100000;
     int* randomNumbers = generateRandomNumbers(n);
     int* randomNumbersClone = cloneVector(randomNumbers, n);
