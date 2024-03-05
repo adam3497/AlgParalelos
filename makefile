@@ -1,24 +1,27 @@
-# Define compiler and flags
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# Definir el compilador
+CC=gcc
 
-# Define source files
-SRC = generate_random_numbers.c merge_sort.c clone.c parallel_merge_sort.c vector_mode.c main.c
+# Definir los archivos fuente y archivos objeto
+SRCS=merge_sort.c generate_random_numbers.c clone.c parallel_merge_sort.c vector_mode.c main.c
+OBJS=$(SRCS:.c=.o)
 
-# Define object files
-OBJ = $(SRC:.c=.o)
+# Definir el nombre del ejecutable
+TARGET=main.exe
 
-# Define default target
-all: main
-
-# Define main target and dependencies
-main: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o main
-
-# Compilation rule for each source file
+# Regla de compilación
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+    $(CC) -c $< -o $@
 
-# Define clean target to remove object files and main executable
+# Regla de enlace
+$(TARGET): $(OBJS)
+    $(CC) $(OBJS) -o $(TARGET)
+
+# Regla predeterminada
+all: $(TARGET)
+
+# Limpiar los archivos objeto y ejecutable
 clean:
-	rm -f $(OBJ) main
+    rm -f $(OBJS) $(TARGET)
+
+# PHONY targets
+.PHONY: all clean
