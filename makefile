@@ -6,7 +6,7 @@ SRCS=merge_sort.c generate_random_numbers.c clone.c parallel_merge_sort.c vector
 OBJS=$(SRCS:.c=.o)
 
 # Definir el nombre del ejecutable
-TARGET=main.exe
+TARGET=main
 
 # Regla de compilación
 %.o: %.c
