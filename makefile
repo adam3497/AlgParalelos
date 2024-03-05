@@ -10,18 +10,18 @@ TARGET=main.exe
 
 # Regla de compilación
 %.o: %.c
-    $(CC) -c $< -o $@
+		$(CC) -c $< -o $@
 
 # Regla de enlace
 $(TARGET): $(OBJS)
-    $(CC) $(OBJS) -o $(TARGET)
+		$(CC) $(OBJS) -o $(TARGET)
 
 # Regla predeterminada
 all: $(TARGET)
 
 # Limpiar los archivos objeto y ejecutable
 clean:
-    rm -f $(OBJS) $(TARGET)
+		rm -f $(OBJS) $(TARGET)
 
 # PHONY targets
 .PHONY: all clean
