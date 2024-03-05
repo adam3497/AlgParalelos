@@ -6,6 +6,8 @@
 
 #define NUM_THREADS 4 // max number of threads possible
 
+pthread_mutex_t mutex;
+
 /**
  * Structure containing arguments for the count_frequency function.
  * 
@@ -48,8 +50,14 @@ void* count_frequency(void* arg) {
         // calculate the adjusted index by adding the offset
         int index = args->vector[i] + offset;
 
+        // lock the mutex before accessing frequencies array
+        pthread_mutex_lock(&mutex);
+
         // incremente the count at the adjusted index
         args->frequencies[index]++;
+
+        // unlock the mutex after updating frequencies array
+        pthread_mutex_unlock(&mutex);
     }
     pthread_exit(NULL);
 }
@@ -72,6 +80,9 @@ void* count_frequency(void* arg) {
 int parallel_mode(int* vector, int vector_size, int num_threads) {
     int frequencies[2001]; // Adjusted size of frequencies array
     memset(frequencies, 0, sizeof(frequencies)); // initialize all element to zero
+
+    // initialize the mutex
+    pthread_mutex_init(&mutex, NULL);
 
     // create an array of n threads
     pthread_t threads[num_threads];
@@ -110,6 +121,9 @@ int parallel_mode(int* vector, int vector_size, int num_threads) {
             mode = i - offset;
         }
     }
+
+    // once it finished, destroy the mutex
+    pthread_mutex_destroy(&mutex);
 
     return mode;
 }
